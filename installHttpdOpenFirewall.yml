@@ -1,0 +1,42 @@
+---
+# opens firewall / installs httpd / uses Ansible Jinja2 
+# # templating to create index.html
+- name: install httpd / open http firewall port
+  hosts: webservers
+  remote_user: lnxcfg
+  become: true
+  become_method: sudo
+  become_user: root 
+
+  vars:
+    templateSource: '/home/lnxcfg/templates/index.j2'
+
+  tasks:
+    - name: open http firewall port
+      firewalld:
+        service: http 
+        zone: public
+        immediate: yes
+        permanent: true
+        state: enabled
+ 
+    - name:  install httpd
+      yum:
+        name: httpd
+        state: present       
+
+    - name: httpd template for index.html
+      template:
+        src: "{{ templateSource }}"
+        dest: /var/www/html/index.html
+        owner: root
+        group: root
+        mode: 0644
+      notify: restart httpd        
+
+  handlers:
+    - name: restart httpd
+      service:
+        name: httpd
+        enabled: yes
+        state: restarted

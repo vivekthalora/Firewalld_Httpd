@@ -1,0 +1,18 @@
+---
+#firewalld doesn't exist on AWS CentOS 7 by default
+#The firewalld ruleset configuration will fail unless we start firewalld
+
+- name: install httpd / open http firewall port
+  hosts: webservers
+  remote_user: lnxcfg
+  become: true
+  become_method: sudo
+  become_user: root
+
+  tasks:
+    - name: Make sure firewalld is installed
+      yum: name=firewalld state=present
+      when: ansible_os_family == "RedHat"
+
+    - name: Enable and start firewalld
+      service: name=firewalld state=started enabled=yes masked=no
