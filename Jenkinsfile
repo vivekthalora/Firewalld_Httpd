@@ -37,7 +37,7 @@ pipeline {
         sshagent(credentials : ['Ansible_SSH_PrivateKey']) {
 	  sh "pwd" 
           //sh 'ssh -o StrictHostKeyChecking=no lnxcfg@ansible-svr01 ansible-playbook ./firewalld.yml -i ./hosts'
-          sh "ssh -o StrictHostKeyChecking=no lnxcfg@ansible-svr01 -C \"pwd; rm -rf Project; mkdir Project; cd Project; git clone https://github.com/vivekthalora/Firewalld_Httpd.git; cd Ansible-Http-Firewalld; ansible-playbook firewalld.yml -i hosts\""
+          sh "ssh -o StrictHostKeyChecking=no lnxcfg@ansible-svr01 -C \"pwd; rm -rf Project; mkdir Project; cd Project; git clone https://github.com/vivekthalora/Firewalld_Httpd.git; cd Firewalld_Httpd; ansible-playbook firewalld.yml -i hosts\""
         } 
       }     
     }
