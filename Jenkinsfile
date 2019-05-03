@@ -10,6 +10,7 @@ pipeline {
 	credentialsId: 'Git-Terraform-SSH',
 	url: 'https://github.com/vivekthalora/Firewalld_Httpd.git'
       }
+    }
     // SSH remote connect and execute commands
     stage ('Deploy') {
       sshagent(credentials : ['Ansible_SSH_PrivateKey']) {
@@ -18,5 +19,5 @@ pipeline {
         //sh 'scp ./source/filename lnxcfg@ansible-svr01:/remotehost/target'
       }
     }
-  }
+  } 
 }
