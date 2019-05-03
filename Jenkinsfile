@@ -8,7 +8,8 @@ pipeline {
   }
 
   stages {
-    // Git checkout
+
+   // Git checkout
     stage ('Get Git Repo') {
       steps {
 	git branch: 'master',
