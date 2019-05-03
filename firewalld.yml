@@ -3,7 +3,7 @@
 #The firewalld ruleset configuration will fail unless we start firewalld
 
 - name: install httpd / open http firewall port
-  hosts: webservers
+  hosts: web-servers
   remote_user: lnxcfg
   become: true
   become_method: sudo
