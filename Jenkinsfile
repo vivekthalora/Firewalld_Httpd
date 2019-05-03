@@ -8,7 +8,7 @@ pipeline {
     string(name: 'SSHuser', description: 'Remote SSH username')
   }
   stages {
-   // Git checkout
+    // Git checkout
     stage ('Get Git Repo') {
       steps {
 	git branch: 'master',
@@ -32,9 +32,11 @@ pipeline {
     }
     // SSH remote connect and execute commands
     stage ('Running Ansible Playbook Remotely') {
-      sshagent(credentials : ['Ansible_SSH_PrivateKey']) {
-        sh "ssh -o StrictHostKeyChecking=no lnxcfg@ansible-svr01 ansible-playbook firewalld.yml -i hosts"
-      }      
+      steps{
+        sshagent(credentials : ['Ansible_SSH_PrivateKey']) {
+          sh "ssh -o StrictHostKeyChecking=no lnxcfg@ansible-svr01 ansible-playbook firewalld.yml -i hosts"
+        } 
+      }     
     }
   } 
 }
