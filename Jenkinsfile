@@ -19,10 +19,10 @@ pipeline {
 
     // SSH remote connect and execute commands
     stage ('Deploy') {
-      expression {
-        params.skipOneView == false
-      }
       steps{
+        expression {
+          params.skipOneView == false
+        }
         sshagent(credentials : ['Ansible_SSH_PrivateKey']) {
           sh 'ssh -o StrictHostKeyChecking=no lnxcfg@ansible-svr01 uptime'
           //sh 'ssh -v ansible-svr01'
