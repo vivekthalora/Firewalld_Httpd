@@ -4,7 +4,8 @@ pipeline {
   agent any
 
   parameters {
-    booleanParam(name: 'skipOneView', description: 'Skip the OneView stage?', defaultValue: false)
+    //booleanParam(name: 'skipOneView', description: 'Skip the OneView stage?', defaultValue: false)
+    booleanParam(name: 'skipOneView', description: 'Skip the OneView stage?')
   }
 
   stages {
