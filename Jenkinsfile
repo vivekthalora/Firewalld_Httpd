@@ -27,6 +27,7 @@ pipeline {
           //sh 'ssh -v ansible-svr01'
           sh 'scp /var/lib/jenkins/workspace/Ansible-Http-Firewalld/README.md lnxcfg@ansible-svr01:/home/lnxcfg'
 	  sh 'ls -ltra .'
+	  sh 'file -ltra ./firewalld.yml'
 	}
       }
     }
