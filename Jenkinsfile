@@ -35,7 +35,8 @@ pipeline {
     stage ('Running Ansible Playbook Remotely') {
       steps{
         sshagent(credentials : ['Ansible_SSH_PrivateKey']) {
-          sh "ssh -o StrictHostKeyChecking=no lnxcfg@ansible-svr01 ansible-playbook ./firewalld.yml -i ./hosts"
+	  sh "pwd" 
+          //sh "ssh -o StrictHostKeyChecking=no lnxcfg@ansible-svr01 ansible-playbook ./firewalld.yml -i ./hosts"
         } 
       }     
     }
