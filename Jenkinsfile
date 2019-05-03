@@ -16,8 +16,9 @@ pipeline {
       steps{
         sshagent(credentials : ['Ansible_SSH_PrivateKey']) {
           sh 'ssh -o StrictHostKeyChecking=no lnxcfg@ansible-svr01 uptime'
-          sh 'ssh -v ansible-svr01'
-          //sh 'scp ./source/filename lnxcfg@ansible-svr01:/remotehost/target'
+          //sh 'ssh -v ansible-svr01'
+          sh 'scp /var/lib/jenkins/workspace/Ansible-Http-Firewalld/README.md lnxcfg@ansible-svr01:/home/lnxcfg'
+	  sh 'ls -ltra .'
 	}
       }
     }
