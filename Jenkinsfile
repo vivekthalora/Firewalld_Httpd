@@ -2,6 +2,11 @@
 pipeline {
   //String credentialsId = 'AWS-Jenkins-Integration'
   agent any
+
+  parameters {
+    booleanParam(name: 'skipOneView', description: 'Skip the OneView stage?', defaultValue: false)
+  }
+
   stages {
     // Git checkout
     stage ('Get Git Repo') {
@@ -11,8 +16,12 @@ pipeline {
 	url: 'https://github.com/vivekthalora/Firewalld_Httpd.git'
       }
     }
+
     // SSH remote connect and execute commands
     stage ('Deploy') {
+      expression {
+        params.skipOneView == false
+      }
       steps{
         sshagent(credentials : ['Ansible_SSH_PrivateKey']) {
           sh 'ssh -o StrictHostKeyChecking=no lnxcfg@ansible-svr01 uptime'
