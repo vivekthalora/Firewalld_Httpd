@@ -3,14 +3,12 @@ pipeline {
   //String credentialsId = 'AWS-Jenkins-Integration'
   agent any
   stages {
-
     // Git checkout
     stage ('Get Git Repo') {
       steps {
 	parallel("clean": {cleaniWs()}, 
 		 "clone": {checkout scm}})
       }
-
     // SSH remote connect and execute commands
     stage ('Deploy') {
       sshagent(credentials : ['Ansible_SSH_PrivateKey']) {
@@ -19,8 +17,5 @@ pipeline {
         //sh 'scp ./source/filename lnxcfg@ansible-svr01:/remotehost/target'
       }
     }
-    }
-
-
   }
 }
