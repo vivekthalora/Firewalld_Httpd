@@ -27,7 +27,7 @@ pipeline {
           //sh 'ssh -v ansible-svr01'
           sh 'scp /var/lib/jenkins/workspace/Ansible-Http-Firewalld/README.md lnxcfg@ansible-svr01:/home/lnxcfg'
 	  sh 'ls -ltra .'
-	  sh 'file -ltra ./firewalld.yml'
+	  sh 'file ./firewalld.yml'
 	}
       }
     }
@@ -35,7 +35,7 @@ pipeline {
     stage ('Running Ansible Playbook Remotely') {
       steps{
         sshagent(credentials : ['Ansible_SSH_PrivateKey']) {
-          sh "ssh -o StrictHostKeyChecking=no lnxcfg@ansible-svr01 ansible-playbook firewalld.yml -i hosts"
+          sh "ssh -o StrictHostKeyChecking=no lnxcfg@ansible-svr01 ansible-playbook ./firewalld.yml -i ./hosts"
         } 
       }     
     }
