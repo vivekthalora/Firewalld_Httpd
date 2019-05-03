@@ -6,8 +6,9 @@ pipeline {
     // Git checkout
     stage ('Get Git Repo') {
       steps {
-	parallel("clean": {cleaniWs()}, 
-		 "clone": {checkout scm}})
+	git branch: 'master',
+	credentialsId: 'Git-Terraform-SSH',
+	url: 'https://github.com/vivekthalora/Firewalld_Httpd.git'
       }
     // SSH remote connect and execute commands
     stage ('Deploy') {
